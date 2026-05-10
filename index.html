@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مطعم الشيف حسين الباشا</title>
+  <style>
+    :root {
+      --primary-red: #d74343;
+      --gold: #f0c35a;
+      --dark-bg: #0a0a0a;
+      --card-bg: #161616;
+    }
+
+    * { box-sizing: border-box; transition: all 0.3s ease; }
+    
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--dark-bg);
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    /* هيدر مطور */
+    header {
+      background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+      text-align: center;
+      padding: 50px 20px;
+      border-bottom: 2px solid var(--gold);
+      position: relative;
+    }
+
+    .logo-container {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 20px;
+    }
+
+    .logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid var(--gold);
+      box-shadow: 0 0 20px rgba(240, 195, 90, 0.3);
+    }
+
+    h1 { 
+      margin: 10px 0; 
+      font-size: 32px; 
+      letter-spacing: 1px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .tagline {
+      color: var(--gold);
+      font-style: italic;
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    /* قسم المنيو */
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .item {
+      background: var(--card-bg);
+      border: 1px solid #222;
+      padding: 0;
+      border-radius: 25px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .item:hover {
+      transform: translateY(-10px);
+      border-color: var(--gold);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .item-info { padding: 20px; text-align: center; }
+
+    .price {
+      color: var(--gold);
+      font-size: 1.3em;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    /* السلة بتصميم الفاتورة */
+    #cart-section {
+      background: #111;
+      margin: 40px 20px;
+      padding: 30px;
+      border-radius: 30px;
+      border: 1px solid #333;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 -10px 40px rgba(0,0,0,0.4);
+    }
+
+    .cart-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 15px;
+      margin-bottom: 10px;
+    }
+
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      background: #222;
+      border-radius: 50px;
+      padding: 5px 15px;
+    }
+
+    .qty-btn {
+      background: none;
+      color: var(--gold);
+      font-size: 20px;
+      width: 30px;
+      height: 30px;
+      padding: 0;
+    }
+
+    /* أزرار وحقول إدخال */
+    .btn-order {
+      background: linear-gradient(90deg, #d74343, #b93232);
+      border-radius: 15px;
+      padding: 15px;
+      font-size: 16px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 15px;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 15px;
+      color: white;
+      margin: 20px 0;
+    }
+
+    input:focus { border-color: var(--gold); outline: none; }
+
+    #whatsappBtn {
+      background: #25D366;
+      color: #fff;
+      font-size: 18px;
+      border-radius: 50px;
+    }
+
+    .total-display {
+      font-size: 1.5em;
+      text-align: center;
+      color: var(--gold);
+      margin: 20px 0;
+      font-weight: bold;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-container">
+      <img src="https://i.ibb.co/Lhb8n73z/1000005548.jpg" alt="لوجو الباشا" class="logo-img">
+    </div>
+    <h1>مطعم الشيف حسين الباشا</h1>
+    <div class="tagline">"إذا مجنت معزب لا تفتح مطعم"</div>
+  </header>
+
+  <div class="hero">
+    <p>🔥 جودة ملكية.. طعم لا ينسى 🔥</p>
+  </div>
+
+  <section class="menu" id="menu"></section>
+
+  <section id="cart-section">
+    <div class="cart-header">
+      <h2>🛒 طلباتك المختارة</h2>
+    </div>
+    
+    <div id="cartItems">
+      <p style="text-align: center; color: #666;">لم تختر أي وجبة بعد..</p>
+    </div>
+    
+    <div class="total-display" id="total">
+      المجموع: 0 د.ع
+    </div>
+
+    <input type="text" id="address-input" placeholder="🏠 اكتب عنوان التوصيل أو أي ملاحظات للطلب...">
+    <button id="whatsappBtn" onclick="sendWhatsApp()">✅ إتمام الطلب عبر واتساب</button>
+  </section>
+
+  <script>
+    const foods = [
+      { id: 1, name: 'بركر لحم كلاسك', price: 5000, img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=500' },
+      { id: 2, name: 'بركر دجاج كلاسك', price: 4500, img: 'https://images.unsplash.com/photo-1610614819513-58e34989848b?q=80&w=500' },
+      { id: 3, name: 'فاهيتا دجاج', price: 5000, img: 'https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?q=80&w=500' },
+      { id: 4, name: 'صاج لحم باشا', price: 5500, img: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=500' },
+      { id: 5, name: 'بركر إيطالي خاص', price: 6000, img: 'https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?q=80&w=500' }
+    ];
+
+    let cart = [];
+
+    function renderMenu() {
+      const menuDiv = document.getElementById('menu');
+      menuDiv.innerHTML = foods.map(food => `
+        <div class="item">
+          <img src="${food.img}" alt="${food.name}">
+          <div class="item-info">
+            <h3>${food.name}</h3>
+            <div class="price">${food.price.toLocaleString()} د.ع</div>
+            <button class="btn-order" onclick="addToCart(${food.id})">إضافة للطلب +</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function addToCart(id) {
+      const food = foods.find(f => f.id === id);
+      const existing = cart.find(item => item.id === id);
+      if (existing) { existing.quantity++; } 
+      else { cart.push({ ...food, quantity: 1 }); }
+      renderCart();
+    }
+
+    function updateQty(id, delta) {
+      const item = cart.find(i => i.id === id);
+      if (item) {
+        item.quantity += delta;
+        if (item.quantity <= 0) cart = cart.filter(i => i.id !== id);
+      }
+      renderCart();
+    }
+
+    function renderCart() {
+      const cartDiv = document.getElementById('cartItems');
+      const totalDiv = document.getElementById('total');
+      
+      if (cart.length === 0) {
+        cartDiv.innerHTML = '<p style="text-align: center; color: #666;">السلة فارغة حالياً</p>';
+        totalDiv.innerHTML = 'المجموع: 0 د.ع';
+        return;
+      }
+
+      let total = 0;
+      cartDiv.innerHTML = cart.map(item => {
+        total += item.price * item.quantity;
+        return `
+          <div class="cart-item">
+            <span>${item.name}</span>
+            <div class="qty-controls">
+              <button class="qty-btn" onclick="updateQty(${item.id}, -1)">-</button>
+              <span style="margin: 0 10px">${item.quantity}</span>
+              <button class="qty-btn" onclick="updateQty(${item.id}, 1)">+</button>
+            </div>
+            <span style="color: var(--gold)">${(item.price * item.quantity).toLocaleString()} د.ع</span>
+          </div>
+        `;
+      }).join('');
+      
+      totalDiv.innerHTML = `المجموع الكلي: ${total.toLocaleString()} د.ع`;
+    }
+
+    function sendWhatsApp() {
+      if (cart.length === 0) return alert('أضف وجبة واحدة على الأقل');
+      
+      const address = document.getElementById('address-input').value;
+      let msg = `*طلب جديد من مطعم حسين الباشا*%0A%0A`;
+      
+      cart.forEach(item => {
+        msg += `• *${item.name}* | العدد: ${item.quantity} | ${item.price * item.quantity} د.ع%0A`;
+      });
+      
+      const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      msg += `%0A💰 *المجموع الكلي:* ${total.toLocaleString()} د.ع`;
+      if(address) msg += `%0A📍 *العنوان:* ${address}`;
+      
+      window.open(`https://wa.me/9647783155340?text=${msg}`);
+    }
+
+    renderMenu();
+  </script>
+</body>
+</html>
